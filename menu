@@ -1,0 +1,173 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.demo.package2.ApplicationConfiguration;
+import com.example.demo.package2.classc;
+
+
+
+@Component
+public class classa{
+
+public String parentTilte;
+public String parentUrl;
+public List<classd> childLevel1;
+public String getParentTilte() {
+	return parentTilte;
+}
+public void setParentTilte(String parentTilte) {
+	this.parentTilte = parentTilte;
+}
+public String getParentUrl() {
+	return parentUrl;
+}
+public void setParentUrl(String parentUrl) {
+	this.parentUrl = parentUrl;
+}
+public List<classd> getChildLevel1() {
+	return childLevel1;
+}
+public void setChildLevel1(List<classd> childLevel1) {
+	this.childLevel1 = childLevel1;
+}
+public classa(String parentTilte, String parentUrl, List<classd> childLevel1) {
+	this.parentTilte = parentTilte;
+	this.parentUrl = parentUrl;
+	this.childLevel1 = childLevel1;
+}
+public classa() {
+	// TODO Auto-generated constructor stub
+}
+	
+
+
+}
+
+
+=====================================\\\\
+
+
+
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.example.demo.package2.classc;
+
+@Component
+class classd {
+
+	public String url;
+	public String title;
+	public classd(String url, String title, List<classf> childmenu2) {
+		super();
+		this.url = url;
+		this.title = title;
+		this.childmenu2 = childmenu2;
+	}
+	public classd() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public List<classf> getChildmenu2() {
+		return childmenu2;
+	}
+	public void setChildmenu2(List<classf> childmenu2) {
+		this.childmenu2 = childmenu2;
+	}
+	public List<classf> childmenu2;
+	
+}
+
+======================================
+
+
+
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+@Component
+class classf {
+	
+	public String url;
+	public String title;
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public classf(String url, String title) {
+		super();
+		this.url = url;
+		this.title = title;
+	}
+	public classf() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+}
+
+
+======================================
+
+@RequestMapping("/")
+	public List returndata (HttpServletResponse response) {
+		List<classa> menulist=new ArrayList<>();
+		List<classd> ob =new ArrayList<>();
+		List<classd> obc =new ArrayList<>();
+
+		menulist.add(new classa("home","/home",ob));
+		menulist.add(new classa("2","/2",obc));
+		List<classf> ob1 =new ArrayList<>();
+		List<classf> ob2 =new ArrayList<>();
+		obc.add(new classd("plain1","ddff",null));
+		obc.add(new classd("plain1","ddff",null));
+		obc.add(new classd("plain1","ddff",null));
+		obc.add(new classd("plain1","ddff",null));
+		ob.add(new classd("child1","blah",ob1));
+		ob.add(new classd("child12","blahblah",ob2));
+		classf f=new classf();
+		ob1.add(new classf("child2","dddddd"));	
+		ob1.add(new classf("dddww","ddddaaa"));	
+		ob1.add(new classf("fddffd","dddddd"));	
+		ob2.add(new classf("child2","dddddd"));	
+		ob2.add(new classf("dddww","ddddaaa"));	
+		ob2.add(new classf("fddffd","dddddd"));	
+	//	a.returndata();
+		//d.returndata();
+        //f.returndata();	
+		/*try {
+			ob=returnlist();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 response.setContentType("text/html");
+		    response.setCharacterEncoding("UTF-8");*/
+		System.out.println(menulist);
+		    return menulist;
+	}
